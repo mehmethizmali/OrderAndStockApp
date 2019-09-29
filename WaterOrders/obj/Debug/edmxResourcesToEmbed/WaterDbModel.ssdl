@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WatersOrderDbContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WatersOrderDbContextStoreContainer">
+    <EntitySet Name="Branches" EntityType="WatersOrderDbContext.Store.Branches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="WatersOrderDbContext.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customers" EntityType="WatersOrderDbContext.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order_Detail" EntityType="WatersOrderDbContext.Store.Order_Detail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="WatersOrderDbContext.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="WatersOrderDbContext.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="WatersOrderDbContext.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="WatersOrderDbContext.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MSreplication_options" EntityType="WatersOrderDbContext.Store.MSreplication_options" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="spt_fallback_db" EntityType="WatersOrderDbContext.Store.spt_fallback_db" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="spt_fallback_dev" EntityType="WatersOrderDbContext.Store.spt_fallback_dev" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="spt_fallback_usg" EntityType="WatersOrderDbContext.Store.spt_fallback_usg" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="spt_monitor" EntityType="WatersOrderDbContext.Store.spt_monitor" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Users_Branches1" Association="WatersOrderDbContext.Store.FK_Users_Branches1">
+      <End Role="Branches" EntitySet="Branches" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Categories" Association="WatersOrderDbContext.Store.FK_Products_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Custumers" Association="WatersOrderDbContext.Store.FK_Orders_Custumers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Detail_Orders" Association="WatersOrderDbContext.Store.FK_Order_Detail_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Detail_Products" Association="WatersOrderDbContext.Store.FK_Order_Detail_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Detail" EntitySet="Order_Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="WatersOrderDbContext.Store.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Branches">
+    <Key>
+      <PropertyRef Name="BranchId" />
+    </Key>
+    <Property Name="BranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="District" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Description" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustumerId" />
+    </Key>
+    <Property Name="CustumerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Surname" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="District" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="City" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Order_Detail">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrderId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="UnitPrice" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="Quantity" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CostumerId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderStatu" Type="tinyint" Nullable="false" />
+    <Property Name="UnitPrice" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="UnitPrice" Type="decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="UnitInStock" Type="smallint" Nullable="true" />
+    <Property Name="Discontinued" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="authority" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MSreplication_options">
+    <Key>
+      <PropertyRef Name="optname" />
+      <PropertyRef Name="value" />
+      <PropertyRef Name="major_version" />
+      <PropertyRef Name="minor_version" />
+      <PropertyRef Name="revision" />
+      <PropertyRef Name="install_failures" />
+    </Key>
+    <Property Name="optname" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="value" Type="bit" Nullable="false" />
+    <Property Name="major_version" Type="int" Nullable="false" />
+    <Property Name="minor_version" Type="int" Nullable="false" />
+    <Property Name="revision" Type="int" Nullable="false" />
+    <Property Name="install_failures" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spt_fallback_db">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="version" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_dbid" Type="smallint" Nullable="true" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="version" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spt_fallback_dev">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="low" />
+      <PropertyRef Name="high" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="phyname" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_low" Type="int" Nullable="true" />
+    <Property Name="xfallback_drive" Type="char" Nullable="true" MaxLength="2" />
+    <Property Name="low" Type="int" Nullable="false" />
+    <Property Name="high" Type="int" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="phyname" Type="varchar" Nullable="false" MaxLength="127" />
+  </EntityType>
+  <EntityType Name="spt_fallback_usg">
+    <Key>
+      <PropertyRef Name="xserver_name" />
+      <PropertyRef Name="xdttm_ins" />
+      <PropertyRef Name="xdttm_last_ins_upd" />
+      <PropertyRef Name="dbid" />
+      <PropertyRef Name="segmap" />
+      <PropertyRef Name="lstart" />
+      <PropertyRef Name="sizepg" />
+      <PropertyRef Name="vstart" />
+    </Key>
+    <Property Name="xserver_name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="xdttm_ins" Type="datetime" Nullable="false" />
+    <Property Name="xdttm_last_ins_upd" Type="datetime" Nullable="false" />
+    <Property Name="xfallback_vstart" Type="int" Nullable="true" />
+    <Property Name="dbid" Type="smallint" Nullable="false" />
+    <Property Name="segmap" Type="int" Nullable="false" />
+    <Property Name="lstart" Type="int" Nullable="false" />
+    <Property Name="sizepg" Type="int" Nullable="false" />
+    <Property Name="vstart" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spt_monitor">
+    <Key>
+      <PropertyRef Name="lastrun" />
+      <PropertyRef Name="cpu_busy" />
+      <PropertyRef Name="io_busy" />
+      <PropertyRef Name="idle" />
+      <PropertyRef Name="pack_received" />
+      <PropertyRef Name="pack_sent" />
+      <PropertyRef Name="connections" />
+      <PropertyRef Name="pack_errors" />
+      <PropertyRef Name="total_read" />
+      <PropertyRef Name="total_write" />
+      <PropertyRef Name="total_errors" />
+    </Key>
+    <Property Name="lastrun" Type="datetime" Nullable="false" />
+    <Property Name="cpu_busy" Type="int" Nullable="false" />
+    <Property Name="io_busy" Type="int" Nullable="false" />
+    <Property Name="idle" Type="int" Nullable="false" />
+    <Property Name="pack_received" Type="int" Nullable="false" />
+    <Property Name="pack_sent" Type="int" Nullable="false" />
+    <Property Name="connections" Type="int" Nullable="false" />
+    <Property Name="pack_errors" Type="int" Nullable="false" />
+    <Property Name="total_read" Type="int" Nullable="false" />
+    <Property Name="total_write" Type="int" Nullable="false" />
+    <Property Name="total_errors" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Users_Branches1">
+    <End Role="Branches" Type="WatersOrderDbContext.Store.Branches" Multiplicity="1" />
+    <End Role="Users" Type="WatersOrderDbContext.Store.Users" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Branches">
+        <PropertyRef Name="BranchId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Categories">
+    <End Role="Categories" Type="WatersOrderDbContext.Store.Categories" Multiplicity="1" />
+    <End Role="Products" Type="WatersOrderDbContext.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Custumers">
+    <End Role="Customers" Type="WatersOrderDbContext.Store.Customers" Multiplicity="1" />
+    <End Role="Orders" Type="WatersOrderDbContext.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustumerId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="CostumerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Detail_Orders">
+    <End Role="Orders" Type="WatersOrderDbContext.Store.Orders" Multiplicity="1" />
+    <End Role="Order_Detail" Type="WatersOrderDbContext.Store.Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Detail_Products">
+    <End Role="Products" Type="WatersOrderDbContext.Store.Products" Multiplicity="1" />
+    <End Role="Order_Detail" Type="WatersOrderDbContext.Store.Order_Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Order_Detail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Role="Users" Type="WatersOrderDbContext.Store.Users" Multiplicity="1" />
+    <End Role="Orders" Type="WatersOrderDbContext.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
